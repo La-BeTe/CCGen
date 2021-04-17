@@ -6,5 +6,4 @@ install:
 scripts:
     - npm test
     - npm i codecov
-after_success:
     - npx codecov
