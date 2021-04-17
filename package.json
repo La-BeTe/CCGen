@@ -1,0 +1,35 @@
+{
+  "name": "ccgen",
+  "version": "1.0.0",
+  "description": "For generating fake credit card numbers that pass the Luhn check",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/jest": "^26.0.22",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/La-BeTe/CCGen.git"
+  },
+  "keywords": [
+    "credit",
+    "card",
+    "generator"
+  ],
+  "author": "La-BeTe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/La-BeTe/CCGen/issues"
+  },
+  "homepage": "https://github.com/La-BeTe/CCGen#readme"
+}
