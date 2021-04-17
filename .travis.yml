@@ -1,9 +1,10 @@
 language: node_js
 node_js:
-  - 12
+    - 12
 install:
-  - npm install
+    - npm i
 scripts:
-  - npm install codecov -g
+    - npm test
+    - npm i codecov
 after_success:
-  - codecov
+    - npx codecov
