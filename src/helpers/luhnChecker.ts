@@ -1,4 +1,7 @@
-export default function (num: string | number) {
+export default function (
+    num: string | number,
+    returnCorrectCheckDigit = false
+) {
     num = Number(num);
     if (Number.isNaN(num)) return false;
     // Luhn Check algo below
@@ -13,17 +16,14 @@ export default function (num: string | number) {
             sum += current;
         } else {
             let k = current * 2;
-            let kToBeAddedToSum = 0;
             if (k > 9) {
-                while (k >= 1) {
-                    kToBeAddedToSum += k % 10;
-                    k = Math.floor(k / 10);
-                }
-            } else {
-                kToBeAddedToSum = k;
+                k -= 9;
             }
-            sum += kToBeAddedToSum;
+            sum += k;
         }
     }
-    return (sum * 9) % 10 === checkDigit;
+    const correctCheckDigit = (sum * 9) % 10;
+    return returnCorrectCheckDigit
+        ? String(correctCheckDigit)
+        : correctCheckDigit === checkDigit;
 }

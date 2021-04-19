@@ -104,5 +104,4 @@ dist
 .tern-port
 
 package-lock.json
-dist/
 lib/
