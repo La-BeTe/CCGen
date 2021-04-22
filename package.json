@@ -1,5 +1,5 @@
 {
-    "name": "cc-gen",
+    "name": "@la-bete/ccgen",
     "version": "0.1.0",
     "description": "Generate valid credit card numbers",
     "main": "./lib",
@@ -18,7 +18,7 @@
         "test": "jest --coverage",
         "test:watch": "jest --watch",
         "compile": "rm -rf lib && tsc",
-        "push:publish": "npm run compile && git push && npm publish"
+        "push:publish": "npm run compile && git push && npm publish --access=public"
     },
     "repository": {
         "type": "git",
