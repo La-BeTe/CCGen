@@ -1,3 +1,1 @@
-import CCGen from "./classes/CCGen";
-
-export default CCGen;
+export { CCGen as default } from "./classes/CCGen";

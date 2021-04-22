@@ -14,7 +14,7 @@ interface GenerateCCOptions {
     issuer?: string;
 }
 
-export default class CCGen {
+export class CCGen {
     /*
      * The 'indexes' variable allows for fast fetching of bins
      * It is a Map of a string representing the property being indexed
@@ -39,7 +39,7 @@ export default class CCGen {
     private getIndexedIssuer(arg: string) {
         const issuer = this.indexes.get("issuer");
         if (issuer) {
-            return issuer.get(arg);
+            return issuer.get(arg.toLowerCase());
         }
         return undefined;
     }
