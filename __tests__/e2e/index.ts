@@ -54,6 +54,24 @@ describe("CCGen class instance", () => {
             expect(issuer).toBe("Zenith Bank PLC");
         });
 
+        test("that returns a valid PAN that matches the 'issuer' and 'brand' arguments", () => {
+            const { issuer, pan } = ccgen.generateCC({
+                issuer: "zenith",
+                brand: "visa"
+            });
+            expect(issuer).toBe("Zenith Bank PLC");
+            expect(String(pan).startsWith("4")).toBe(true);
+        });
+
+        test("that throws an error if the 'issuer' passed in does not issue cards of the 'brand' argument", () => {
+            const testFn = () =>
+                ccgen.generateCC({
+                    issuer: "zenith",
+                    brand: "verve"
+                });
+            expect(testFn).toThrow("The verve brand is not available yet");
+        });
+
         test("that throws an error if 'issuer' argument is not recognized", () => {
             const testFn = () => {
                 return ccgen.generateCC({
@@ -69,9 +87,7 @@ describe("CCGen class instance", () => {
                     brand: "randomBrand"
                 });
             };
-            expect(testFn).toThrow(
-                "randomBrand brand is not a recognized brand"
-            );
+            expect(testFn).toThrow("randomBrand is not a recognized brand");
         });
 
         test("that returns an object with all properties if called with no arguments", () => {

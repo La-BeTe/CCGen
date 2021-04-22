@@ -107,22 +107,30 @@ export default class CCGen {
             let pan: string;
             if (brand) {
                 const indexedBrandOriginal = this.getIndexedBrand(brand);
-                if (!indexedBrandOriginal)
-                    throw `${brand} brand is not a recognized brand`;
-                let indexedBrand = [...indexedBrandOriginal];
-                if (issuer) {
-                    const indexedIssuer = this.getIndexedIssuer(issuer);
-                    if (!indexedIssuer)
-                        throw `${issuer} is not a recognized issuer`;
-                    // Filter indexed brand list based on passed in issuer
-                    indexedBrand = indexedBrand.filter(indexedIssuer.includes);
+                if (indexedBrandOriginal) {
+                    let indexedBrand = [...indexedBrandOriginal];
+                    if (issuer) {
+                        const indexedIssuer = this.getIndexedIssuer(issuer);
+                        if (!indexedIssuer)
+                            throw `${issuer} is not a recognized issuer`;
+                        // Filter indexed brand list based on passed in issuer
+                        indexedBrand = indexedBrand.filter((brand) => {
+                            return indexedIssuer.includes(brand);
+                        });
+                        if (!indexedBrand.length)
+                            throw `BIN issued by ${issuer} with brand ${brand} is not available`;
+                    }
+                    const randomIndex = rng({
+                        min: 0,
+                        max: indexedBrand.length - 1
+                    });
+                    const index = indexedBrand[Number(randomIndex)];
+                    startsWith = binList[index].bin;
+                } else {
+                    if (["mastercard", "visa", "verve"].includes(brand))
+                        throw `The ${brand} brand is not available yet`;
+                    throw `${brand} is not a recognized brand`;
                 }
-                const randomIndex = rng({
-                    min: 0,
-                    max: indexedBrand.length - 1
-                });
-                const index = indexedBrand[Number(randomIndex)];
-                startsWith = binList[index].bin;
             } else if (issuer) {
                 const indexedIssuer = this.getIndexedIssuer(issuer);
                 if (!indexedIssuer)
