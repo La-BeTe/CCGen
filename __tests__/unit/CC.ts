@@ -1,4 +1,4 @@
-import CC from "../../src/CC";
+import CC from "../../src/classes/CC";
 
 describe("Class CC", () => {
     it("should generate random details about the CC", () => {

@@ -1,5 +1,5 @@
-import rng from "./helpers/randomNumberGenerator";
-import names from "./names";
+import rng from "../helpers/randomNumberGenerator";
+import names from "../lists/names";
 
 const Issuers = {
     fcmb: "First City Monument Bank",

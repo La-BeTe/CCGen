@@ -1,7 +1,7 @@
 {
     "name": "ccgen",
     "version": "0.1.0",
-    "description": "For generating fake credit card numbers that pass the Luhn check",
+    "description": "Generate valid credit card numbers",
     "main": "./lib",
     "dependencies": {},
     "devDependencies": {
@@ -16,7 +16,9 @@
     },
     "scripts": {
         "test": "jest --coverage",
-        "test:watch": "jest --watch"
+        "test:watch": "jest --watch",
+        "compile": "rm -rf lib && tsc",
+        "push:publish": "npm run compile && git push && npm publish"
     },
     "repository": {
         "type": "git",
