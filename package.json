@@ -1,6 +1,6 @@
 {
     "name": "@la-bete/ccgen",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Generate valid credit card numbers",
     "main": "./lib",
     "dependencies": {},
