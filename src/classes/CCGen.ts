@@ -14,7 +14,7 @@ interface GenerateCCOptions {
     issuer?: string;
 }
 
-export class CCGen {
+export default class CCGen {
     /*
      * The 'indexes' variable allows for fast fetching of bins
      * It is a Map of a string representing the property being indexed

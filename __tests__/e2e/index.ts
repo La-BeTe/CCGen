@@ -1,4 +1,4 @@
-import CCGen from "../../src";
+import { CCGen } from "../../src";
 
 const ccgen = new CCGen();
 describe("CCGen class instance", () => {

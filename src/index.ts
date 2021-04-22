@@ -1,1 +1,3 @@
-export { CCGen as default } from "./classes/CCGen";
+import CCGenClass from "./classes/CCGen";
+
+export const CCGen = CCGenClass;

@@ -15,7 +15,7 @@ describe("Class CC", () => {
         const cc = new CC("1234567890", "test");
         expect(cc).toHaveProperty("data");
         const data = cc.data;
-        expect(data).toHaveProperty("brand", "test");
+        expect(data).toHaveProperty("brand", "TEST");
     });
 
     it("should include issuer in the data if 'issuer' argument is passed in", () => {
@@ -48,7 +48,7 @@ describe("Class CC", () => {
             expect(cc).toHaveProperty("data");
             const data = cc.data;
             expect(data).toHaveProperty("pan", "1234567890");
-            expect(data).toHaveProperty("brand", "test");
+            expect(data).toHaveProperty("brand", "TEST");
             expect(data).not.toHaveProperty("name");
             expect(data).not.toHaveProperty("cvv");
             expect(data).not.toHaveProperty("expiryDate");
@@ -61,7 +61,7 @@ describe("Class CC", () => {
         expect(cc).toHaveProperty("data");
         const data = cc.data;
         expect(data).toHaveProperty("pan", "1234567890");
-        expect(data).toHaveProperty("brand", "test");
+        expect(data).toHaveProperty("brand", "TEST");
         expect(data).toHaveProperty("name");
         expect(data).toHaveProperty("cvv");
         expect(data).toHaveProperty("expiryDate");

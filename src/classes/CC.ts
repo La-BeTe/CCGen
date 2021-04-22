@@ -61,8 +61,8 @@ export default class CC {
 
     private getExpiryDate() {
         const month = rng({ min: 1, max: 12 }).padStart(2, "0");
-        const currentYear = String(new Date().getFullYear()).slice(-2);
-        const year = rng({ min: currentYear, max: currentYear + 10 });
+        const currentYear = Number(String(new Date().getFullYear()).slice(-2));
+        const year = rng({ min: currentYear + 3, max: currentYear + 15 });
         return `${month}/${year}`;
     }
 
@@ -79,8 +79,10 @@ export default class CC {
         for (let attr of this.attributes) {
             if (!allowedAttrs.includes(attr)) continue;
             //@ts-ignore
-            const thisAttr = this[attr];
+            let thisAttr = this[attr];
             if (!thisAttr) continue;
+            //@ts-ignore
+            if (attr === "brand") thisAttr = thisAttr.toUpperCase();
             result[attr] = thisAttr;
         }
         return result;

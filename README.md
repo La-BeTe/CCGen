@@ -8,25 +8,25 @@ A simple credit card generator.
 ## Installation
 
 ```
-    $ npm install ccgen
+    $ npm install @la-bete/ccgen
 ```
 
 ## Basic Usage
 
 ```javascript
-import CCGen from "ccgen";
+import { CCGen } from "@la-bete/ccgen";
 const ccgen = new CCGen();
 
 const CC = ccgen.generateCC();
 /*
-        CC => {
-            name: [string],
-            cvv: [string],
-            pan: [string],
-            expiryDate: [string],
-            brand: [string]
-        }
-     */
+    CC => {
+        name: [string],
+        cvv: [string],
+        pan: [string],
+        expiryDate: [string],
+        brand: [string]
+    }
+*/
 
 const pan = 12345678934567;
 const isPANValid = ccgen.validatePAN(pan);
