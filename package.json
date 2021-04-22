@@ -1,5 +1,5 @@
 {
-    "name": "ccgen",
+    "name": "cc-gen",
     "version": "0.1.0",
     "description": "Generate valid credit card numbers",
     "main": "./lib",
