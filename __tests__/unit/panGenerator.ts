@@ -60,6 +60,20 @@ describe("PAN Generator", () => {
         expect(luhnChecker(pan)).toBe(true);
     });
 
+    test("should return a Luhn-valid PAN that is 16-digits long if the 'length' argument is less than 16", () => {
+        const pan = panGenerator({
+            startsWith: 1572,
+            contains: 234,
+            endsWith: 347,
+            length: 10
+        });
+        expect(pan.includes("234")).toBe(true);
+        expect(pan.startsWith("1572")).toBe(true);
+        expect(pan.endsWith("347")).toBe(true);
+        expect(pan).toHaveLength(16);
+        expect(luhnChecker(pan)).toBe(true);
+    });
+
     test("should work with strings", () => {
         const pan = panGenerator({
             startsWith: "1572",
@@ -86,6 +100,32 @@ describe("PAN Generator", () => {
         expect(pan.endsWith("347")).toBe(true);
         expect(pan).toHaveLength(20);
         expect(luhnChecker(pan)).toBe(true);
+    });
+
+    test("should accept a 10-digit long 'endsWith' or 'contains' even if 'startsWith' is passed as long as 'startsWithIsBin' is true", () => {
+        const pan = panGenerator({
+            startsWith: 157235,
+            endsWith: 3474,
+            contains: 2345,
+            startsWithIsBin: true
+        });
+        expect(pan.startsWith("157235")).toBe(true);
+        expect(pan.endsWith("3474")).toBe(true);
+        expect(pan.includes("2345")).toBe(true);
+        expect(luhnChecker(pan)).toBe(true);
+    });
+
+    test("should throw an error if the 'contains' and 'endsWith' arguments have a combined length greater than 8", () => {
+        expect(() =>
+            panGenerator({
+                startsWith: 157235,
+                endsWith: 34745,
+                contains: 2345,
+                startsWithIsBin: true
+            })
+        ).toThrow(
+            "The 'contains' and 'endsWith' argument should have a combined length less than or equal to 8"
+        );
     });
 
     test("should throw an error if the 'startsWith', 'contains' and 'endsWith' arguments have a combined length greater than 10", () => {

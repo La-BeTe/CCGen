@@ -19,6 +19,15 @@ describe("Luhn Checker", () => {
         expect(luhnChecker(4007784877621338)).toBe(true);
     });
 
+    test("should handle large numbers passed as strings but throw error if the large number is passed literally", () => {
+        expect(luhnChecker("15722340029689988343")).toBe(true);
+        expect(() => luhnChecker(15722340029689988343)).toThrow();
+    });
+
+    test("should return correct check digit if second argument is truthy", () => {
+        expect(luhnChecker(4007784877621333, true)).toEqual("8");
+    });
+
     test("should also work with strings", () => {
         expect(luhnChecker("4007784877621338")).toBe(true);
         expect(luhnChecker("1407784877612338")).toBe(false);

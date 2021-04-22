@@ -1,4 +1,4 @@
-import CCGen from "../../src/main";
+import CCGen from "../../src";
 
 const ccgen = new CCGen();
 describe("CCGen class instance", () => {
@@ -42,10 +42,25 @@ describe("CCGen class instance", () => {
             });
             expect(String(pan).startsWith("4")).toBe(true);
             const { pan: pan2 } = ccgen.generateCC({
-                brand: "american express"
+                brand: "mastercard"
             });
-            const pan2Start = String(pan2).slice(0, 2);
-            expect(pan2Start === "34" || pan2Start === "37").toEqual(true);
+            expect(String(pan2).startsWith("5")).toBe(true);
+        });
+
+        test("that returns a valid PAN that matches the 'issuer' argument", () => {
+            const { issuer } = ccgen.generateCC({
+                issuer: "zenith"
+            });
+            expect(issuer).toBe("Zenith Bank PLC");
+        });
+
+        test("that throws an error if 'issuer' argument is not recognized", () => {
+            const testFn = () => {
+                return ccgen.generateCC({
+                    issuer: "test"
+                });
+            };
+            expect(testFn).toThrow("'test' is not a recognized issuer");
         });
 
         test("that throws an error if 'brand' argument is not one of 'mastercard', 'visa', 'american express', 'verve'", () => {
@@ -54,18 +69,18 @@ describe("CCGen class instance", () => {
                     brand: "randomBrand"
                 });
             };
-            expect(testFn).toThrow("randomBrand brand is not available");
+            expect(testFn).toThrow(
+                "randomBrand brand is not a recognized brand"
+            );
         });
 
         test("that returns an object with all properties if called with no arguments", () => {
             const result = ccgen.generateCC();
-            expect(result).toHaveProperty([
-                "pan",
-                "cvv",
-                "expiryDate",
-                "name",
-                "brand"
-            ]);
+            expect(result).toHaveProperty("pan");
+            expect(result).toHaveProperty("cvv");
+            expect(result).toHaveProperty("expiryDate");
+            expect(result).toHaveProperty("name");
+            expect(result).toHaveProperty("brand");
         });
 
         test("that returns an object with some object properties if the 'attributes' argument is passed in", () => {
@@ -73,31 +88,19 @@ describe("CCGen class instance", () => {
                 attributes: "pan"
             });
             expect(result1).toHaveProperty("pan");
-            expect(result1).not.toHaveProperty([
-                "name",
-                "brand",
-                "cvv",
-                "expiryDate"
-            ]);
+            expect(result1).not.toHaveProperty("name");
+            expect(result1).not.toHaveProperty("brand");
+            expect(result1).not.toHaveProperty("cvv");
+            expect(result1).not.toHaveProperty("expiryDate");
 
             const result2 = ccgen.generateCC({
                 attributes: ["pan", "cvv", "expiryDate"]
             });
-            expect(result2).toHaveProperty(["pan", "cvv", "expiryDate"]);
-            expect(result2).not.toHaveProperty(["name", "brand"]);
-        });
-
-        test("that returns an object with properties except 'pan' and 'brand' being overriden if arguments of thesame property are passed in", () => {
-            const result = ccgen.generateCC({
-                name: "Hello World",
-                cvv: 234,
-                pan: 123456,
-                brand: "unknown"
-            });
-            expect(result).toHaveProperty("cvv", 234);
-            expect(result).toHaveProperty("name", "Hello World");
-            expect(result.pan).not.toEqual(123456);
-            expect(result.brand).not.toEqual("unknown");
+            expect(result2).toHaveProperty("pan");
+            expect(result2).toHaveProperty("cvv");
+            expect(result2).toHaveProperty("expiryDate");
+            expect(result2).not.toHaveProperty("name");
+            expect(result2).not.toHaveProperty("brand");
         });
 
         test("that returns an object with no brand if the 'startsWith' argument is passed in", () => {

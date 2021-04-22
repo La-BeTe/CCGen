@@ -2,7 +2,7 @@
     "name": "ccgen",
     "version": "0.1.0",
     "description": "For generating fake credit card numbers that pass the Luhn check",
-    "main": "./lib/main.js",
+    "main": "./lib",
     "dependencies": {},
     "devDependencies": {
         "@babel/core": "^7.13.15",
